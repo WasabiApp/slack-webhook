@@ -3,8 +3,8 @@ import { logger } from "@tinyhttp/logger";
 import { WebClient } from "@slack/web-api";
 import { config } from "@tinyhttp/dotenv";
 
-const envObject = config()?.["parsed"];
-const slackInstance = new WebClient(envObject.SLACK_TOKEN);
+const envObject = config();
+const slackInstance = new WebClient(envObject?.parsed?.SLACK_TOKEN);
 
 new App()
   .use(logger())
@@ -22,7 +22,9 @@ new App()
     });
     res.status(200).send({ status: "ok" });
   })
-  .listen(envObject.PORT, (e) => console.log(`Slack webhook started ✔️`));
+  .listen(envObject?.parsed?.PORT, (e) =>
+    console.log(`Slack webhook started ✔️`)
+  );
 
 const githubReply = (body) => {
   let finalSlackMsg;
