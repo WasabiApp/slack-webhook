@@ -1,9 +1,9 @@
+import app from "./app";
+
 import cluster from "cluster";
 import os from "os";
-import { app } from "./app";
 
 const TOTAL_CPU_COUNT = os.cpus().length;
-
 if (cluster.isMaster) {
   console.log(
     `🛠  Master is running on ${process.pid} with ${TOTAL_CPU_COUNT} workers`
@@ -17,11 +17,10 @@ if (cluster.isMaster) {
     cluster.fork();
   });
 } else {
-  try {
-    app.listen(process.env.PORT || 3000, () => {
-      console.log(`Webhook Server running ✔️`);
-    });
-  } catch (error) {
-    console.error(`Error occured: ${error.message}`);
-  }
+  const server = app.listen(process.env.PORT || 3000, () => {
+    console.info(
+      `Wasabi slack notfier running on Node ${process.version} & port %s ✔️ `,
+      server.address()["port"]
+    );
+  });
 }

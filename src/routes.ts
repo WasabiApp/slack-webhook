@@ -1,5 +1,5 @@
 import { NextFunction, Response, Request } from "express";
-import { responseHandler } from "./responceHandle";
+import { responseHandler } from "./responseHandler";
 import { sendSlackMessage } from "./slack";
 import { githubReply } from "./webhooks/github";
 

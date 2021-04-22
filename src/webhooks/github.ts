@@ -12,7 +12,7 @@ const githubReply = async (body: {
   action?: any;
   pull_request?: any;
 }) => {
-  let finalSlackMsg;
+  let finalSlackMsg: string;
   const {
     ref,
     sender,
