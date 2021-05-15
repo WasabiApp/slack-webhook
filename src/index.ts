@@ -3,7 +3,7 @@ import app from "./app";
 import cluster from "cluster";
 import os from "os";
 
-const TOTAL_CPU_COUNT = os.cpus().length;
+const TOTAL_CPU_COUNT = 1;
 if (cluster.isMaster) {
   console.log(
     `🛠  Master is running on ${process.pid} with ${TOTAL_CPU_COUNT} workers`
